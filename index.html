@@ -1,1762 +1,675 @@
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Family - Premium Car Parts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      }
-
-      :root {
-        --primary-color: #1a73e8;
-        --secondary-color: #34a853;
-        --dark-color: #202124;
-        --light-color: #f8f9fa;
-        --text-color: #5f6368;
-        --border-color: #dadce0;
-        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        --transition: all 0.3s ease;
-      }
-
-      body {
-        background-color: var(--light-color);
-        color: var(--text-color);
-        line-height: 1.6;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 15px;
-      }
-
-      /* Header Styles */
-      header {
-        background-color: white;
-        box-shadow: var(--shadow);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-
-      .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0;
-      }
-
-      .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: var(--primary-color);
-        text-decoration: none;
-        transition: var(--transition);
-      }
-
-      .logo:hover {
-        color: var(--secondary-color);
-      }
-
-      nav ul {
-        display: flex;
-        list-style: none;
-      }
-
-      nav ul li {
-        margin-left: 20px;
-      }
-
-      nav ul li a {
-        text-decoration: none;
-        color: var(--text-color);
-        font-weight: 500;
-        transition: var(--transition);
-        position: relative;
-      }
-
-      nav ul li a:hover {
-        color: var(--primary-color);
-      }
-
-      nav ul li a.active {
-        color: var(--primary-color);
-      }
-
-      nav ul li a.active::after {
-        content: "";
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: var(--primary-color);
-      }
-
-      .mobile-menu {
-        display: none;
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      .cart-icon {
-        position: relative;
-        cursor: pointer;
-      }
-
-      .cart-count {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        background-color: var(--secondary-color);
-        color: white;
-        font-size: 12px;
-        width: 18px;
-        height: 18px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      /* Page Styles */
-      .page {
-        display: none;
-        animation: fadeIn 0.5s ease;
-      }
-
-      .page.active {
-        display: block;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
+        :root {
+            --cream: #EFE4D2;
+            --blue-light: #254D70;
+            --blue-dark: #131D4F;
+            --rust: #954C2E;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray: #777777;
         }
-        to {
-          opacity: 1;
-          transform: translateY(0);
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      }
-
-      /* Home Page Styles */
-      .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-          url("https://picsum.photos/seed/carparts/1600/600.jpg");
-        background-size: cover;
-        background-position: center;
-        color: white;
-        text-align: center;
-        padding: 100px 0;
-        margin-bottom: 40px;
-      }
-
-      .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
-      }
-
-      .hero p {
-        font-size: 1.2rem;
-        max-width: 700px;
-        margin: 0 auto 30px;
-      }
-
-      .btn {
-        display: inline-block;
-        background-color: var(--primary-color);
-        color: white;
-        padding: 12px 24px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: var(--transition);
-        border: none;
-        cursor: pointer;
-      }
-
-      .btn:hover {
-        background-color: #0d62d9;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      .btn-secondary {
-        background-color: var(--secondary-color);
-      }
-
-      .btn-secondary:hover {
-        background-color: #2d8e47;
-      }
-
-      .section-title {
-        font-size: 2rem;
-        color: var(--dark-color);
-        margin-bottom: 30px;
-        text-align: center;
-        position: relative;
-      }
-
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background-color: var(--primary-color);
-      }
-
-      .categories {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-bottom: 50px;
-      }
-
-      .category-card {
-        background-color: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        transition: var(--transition);
-        cursor: pointer;
-      }
-
-      .category-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .category-img {
-        height: 180px;
-        background-size: cover;
-        background-position: center;
-      }
-
-      .category-info {
-        padding: 20px;
-      }
-
-      .category-info h3 {
-        color: var(--dark-color);
-        margin-bottom: 10px;
-      }
-
-      .featured-products {
-        margin-bottom: 50px;
-      }
-
-      .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-      }
-
-      .product-card {
-        background-color: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        transition: var(--transition);
-      }
-
-      .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .product-img {
-        height: 200px;
-        background-size: cover;
-        background-position: center;
-      }
-
-      .product-info {
-        padding: 15px;
-      }
-
-      .product-title {
-        font-size: 1.1rem;
-        color: var(--dark-color);
-        margin-bottom: 10px;
-      }
-
-      .product-price {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: var(--primary-color);
-        margin-bottom: 15px;
-      }
-
-      .add-to-cart {
-        width: 100%;
-      }
-
-      /* Products Page Styles */
-      .products-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .search-bar {
-        display: flex;
-        flex: 1;
-        max-width: 400px;
-      }
-
-      .search-bar input {
-        flex: 1;
-        padding: 10px 15px;
-        border: 1px solid var(--border-color);
-        border-radius: 4px 0 0 4px;
-        font-size: 16px;
-      }
-
-      .search-bar button {
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 0 4px 4px 0;
-        cursor: pointer;
-        transition: var(--transition);
-      }
-
-      .search-bar button:hover {
-        background-color: #0d62d9;
-      }
-
-      .filter-sort {
-        display: flex;
-        gap: 15px;
-      }
-
-      .filter-sort select {
-        padding: 10px 15px;
-        border: 1px solid var(--border-color);
-        border-radius: 4px;
-        background-color: white;
-        cursor: pointer;
-      }
-
-      /* Product Detail Page Styles */
-      .product-detail {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        margin-bottom: 40px;
-      }
-
-      .product-detail-img {
-        height: 400px;
-        background-size: cover;
-        background-position: center;
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-      }
-
-      .product-detail-info h1 {
-        font-size: 2rem;
-        color: var(--dark-color);
-        margin-bottom: 15px;
-      }
-
-      .product-detail-price {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: var(--primary-color);
-        margin-bottom: 20px;
-      }
-
-      .product-detail-description {
-        margin-bottom: 25px;
-        line-height: 1.8;
-      }
-
-      .product-detail-meta {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 25px;
-      }
-
-      .meta-item {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .meta-label {
-        font-weight: bold;
-        color: var(--dark-color);
-        margin-bottom: 5px;
-      }
-
-      .quantity-selector {
-        display: flex;
-        align-items: center;
-        margin-bottom: 25px;
-      }
-
-      .quantity-selector button {
-        width: 40px;
-        height: 40px;
-        border: 1px solid var(--border-color);
-        background-color: white;
-        font-size: 18px;
-        cursor: pointer;
-      }
-
-      .quantity-selector input {
-        width: 60px;
-        height: 40px;
-        text-align: center;
-        border: 1px solid var(--border-color);
-        border-left: none;
-        border-right: none;
-      }
-
-      .product-actions {
-        display: flex;
-        gap: 15px;
-      }
-
-      .product-tabs {
-        margin-top: 50px;
-      }
-
-      .tabs {
-        display: flex;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 20px;
-      }
-
-      .tab {
-        padding: 10px 20px;
-        cursor: pointer;
-        font-weight: 500;
-        color: var(--text-color);
-        border-bottom: 2px solid transparent;
-        transition: var(--transition);
-      }
-
-      .tab.active {
-        color: var(--primary-color);
-        border-bottom-color: var(--primary-color);
-      }
-
-      .tab-content {
-        display: none;
-      }
-
-      .tab-content.active {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      /* Footer Styles */
-      footer {
-        background-color: var(--dark-color);
-        color: white;
-        padding: 50px 0 20px;
-        margin-top: 50px;
-      }
-
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        margin-bottom: 30px;
-      }
-
-      .footer-column h3 {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-        color: white;
-      }
-
-      .footer-column ul {
-        list-style: none;
-      }
-
-      .footer-column ul li {
-        margin-bottom: 10px;
-      }
-
-      .footer-column ul li a {
-        color: #ccc;
-        text-decoration: none;
-        transition: var(--transition);
-      }
-
-      .footer-column ul li a:hover {
-        color: white;
-      }
-
-      .footer-bottom {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #444;
-        color: #ccc;
-        font-size: 0.9rem;
-      }
-
-      /* Notification Styles */
-      .notification {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: var(--secondary-color);
-        color: white;
-        padding: 15px 20px;
-        border-radius: 4px;
-        box-shadow: var(--shadow);
-        transform: translateY(100px);
-        opacity: 0;
-        transition: var(--transition);
-        z-index: 1000;
-      }
-
-      .notification.show {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      /* Responsive Styles */
-      @media (max-width: 992px) {
-        .product-detail {
-          grid-template-columns: 1fr;
+        
+        body {
+            background-color: var(--cream);
+            color: var(--blue-dark);
+            line-height: 1.6;
         }
-
-        .product-detail-img {
-          height: 300px;
+        
+        a {
+            text-decoration: none;
+            color: inherit;
         }
-      }
-
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2rem;
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        .hero p {
-          font-size: 1rem;
+        
+        /* Header Styles */
+        header {
+            background-color: var(--blue-dark);
+            color: var(--cream);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: var(--rust);
+            margin-right: 10px;
+        }
+        
         nav ul {
-          display: none;
+            display: flex;
+            list-style: none;
         }
-
-        .mobile-menu {
-          display: block;
+        
+        nav ul li {
+            margin-left: 25px;
         }
-
-        .products-header {
-          flex-direction: column;
-          align-items: stretch;
+        
+        nav ul li a {
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
         }
-
-        .search-bar {
-          max-width: 100%;
+        
+        nav ul li a:hover {
+            color: var(--rust);
         }
-
-        .filter-sort {
-          width: 100%;
-          justify-content: space-between;
+        
+        nav ul li a.active {
+            color: var(--rust);
         }
-
-        .product-actions {
-          flex-direction: column;
+        
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--rust);
         }
-
-        .product-detail-meta {
-          grid-template-columns: 1fr;
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
         }
-      }
-
-      @media (max-width: 576px) {
+        
+        .search-box {
+            position: relative;
+            margin-right: 20px;
+        }
+        
+        .search-box input {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            width: 200px;
+            background-color: var(--blue-light);
+            color: var(--cream);
+        }
+        
+        .search-box input::placeholder {
+            color: var(--cream);
+            opacity: 0.7;
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--cream);
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 1.2rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--rust);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
         .hero {
-          padding: 60px 0;
+            background: linear-gradient(rgba(19, 29, 79, 0.8), rgba(19, 29, 79, 0.9)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--cream);
+            padding: 100px 0;
+            text-align: center;
         }
-
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--rust);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--blue-light);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Featured Products */
         .section-title {
-          font-size: 1.5rem;
+            text-align: center;
+            margin: 60px 0 40px;
+            position: relative;
         }
-
-        .product-grid {
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--blue-dark);
+            display: inline-block;
+            padding-bottom: 10px;
         }
-      }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--rust);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            color: var(--rust);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--blue-dark);
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--blue-light);
+            margin-bottom: 15px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .add-to-cart {
+            background-color: var(--blue-dark);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--blue-light);
+        }
+        
+        .view-details {
+            color: var(--blue-dark);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .view-details i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .view-details:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Categories Section */
+        .categories {
+            background-color: var(--blue-light);
+            padding: 60px 0;
+            color: var(--cream);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--rust);
+        }
+        
+        .category-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        /* About Preview */
+        .about-preview {
+            padding: 80px 0;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-size: 2.2rem;
+            color: var(--blue-dark);
+            margin-bottom: 20px;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .about-preview {
+                flex-direction: column;
+            }
+            
+            .about-img, .about-content {
+                flex: auto;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .search-box {
+                margin-right: 10px;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .search-box {
+                display: none;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <!-- Header -->
     <header>
-      <div class="container header-container">
-        <a href="#" class="logo" onclick="showPage('home')">Car family Amila</a>
-        <nav>
-          <ul>
-            <li>
-              <a href="#" class="nav-link active" onclick="showPage('home')"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a href="#" class="nav-link" onclick="showPage('products')"
-                >Products</a
-              >
-            </li>
-            <li>
-              <a href="#" class="nav-link" onclick="showPage('about')">About</a>
-            </li>
-            <li>
-              <a href="#" class="nav-link" onclick="showPage('contact')"
-                >Contact</a
-              >
-            </li>
-          </ul>
-        </nav>
-        <div
-          class="cart-icon"
-          onclick="showNotification('Cart feature coming soon!')"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path
-              d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-            ></path>
-          </svg>
-          <span class="cart-count">0</span>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <span>Car Family</span>
+                </div>
+                
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search parts...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
-      </div>
     </header>
 
-    <!-- Home Page -->
-    <div id="home" class="page active">
-      <!-- Hero Section -->
-      <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-          <h1>Premium Car Parts</h1>
-          <p>
-            Find high-quality auto parts at competitive prices. We offer a wide
-            selection of components for all makes and models.
-          </p>
-          <a href="#" class="btn" onclick="showPage('products')">Shop Now</a>
+            <h1>Premium Car Parts for Your Vehicle</h1>
+            <p>Discover high-quality automotive parts and accessories for all makes and models. From engine components to exterior accessories, we have everything you need.</p>
+            <a href="products.html" class="btn">Shop Now</a>
         </div>
-      </section>
+    </section>
 
-      <!-- Categories Section -->
-      <section class="container">
-        <h2 class="section-title">Shop by Category</h2>
-        <div class="categories">
-          <div class="category-card" onclick="filterProducts('engine')">
-            <div
-              class="category-img"
-              style="
-                background-image: url('https://picsum.photos/seed/engine/400/300.jpg');
-              "
-            ></div>
-            <div class="category-info">
-              <h3>Engine Parts</h3>
-              <p>Pistons, cylinders, gaskets and more</p>
-            </div>
-          </div>
-          <div class="category-card" onclick="filterProducts('brake')">
-            <div
-              class="category-img"
-              style="
-                background-image: url('https://picsum.photos/seed/brake/400/300.jpg');
-              "
-            ></div>
-            <div class="category-info">
-              <h3>Brake System</h3>
-              <p>Brake pads, rotors, calipers and more</p>
-            </div>
-          </div>
-          <div class="category-card" onclick="filterProducts('suspension')">
-            <div
-              class="category-img"
-              style="
-                background-image: url('https://picsum.photos/seed/suspension/400/300.jpg');
-              "
-            ></div>
-            <div class="category-info">
-              <h3>Suspension</h3>
-              <p>Shocks, struts, control arms and more</p>
-            </div>
-          </div>
-          <div class="category-card" onclick="filterProducts('electrical')">
-            <div
-              class="category-img"
-              style="
-                background-image: url('https://picsum.photos/seed/electrical/400/300.jpg');
-              "
-            ></div>
-            <div class="category-info">
-              <h3>Electrical</h3>
-              <p>Batteries, alternators, starters and more</p>
-            </div>
-          </div>
+    <!-- Featured Products -->
+    <section class="container">
+        <div class="section-title">
+            <h2>Featured Products</h2>
         </div>
-      </section>
-
-      <!-- Featured Products Section -->
-      <section class="container featured-products">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="product-grid">
-          <div class="product-card" onclick="showProductDetail(1)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product1/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Premium Brake Pads</h3>
-              <p class="product-price">$45.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Premium Brake Pads', 45.99)"
-              >
-                Add to Cart
-              </button>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP._MBZszw2OduHWRo308JOLAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Brake Pads">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Braking System</div>
+                    <h3 class="product-title">Premium Brake Pads</h3>
+                    <div class="product-price">$89.99</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <a href="#" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(2)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://tse3.mm.bing.net/th/id/OIP.puj2fQnm2Kw95C8Mv2pnPwHaG6?rs=1&pid=ImgDetMain&o=7&rm=3');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">High Performance Air Filter</h3>
-              <p class="product-price">$32.50</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('High Performance Air Filter', 32.50)"
-              >
-                Add to Cart
-              </button>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1603712610496-5365ac5c87c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Air Filter">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Engine Parts</div>
+                    <h3 class="product-title">High-Performance Air Filter</h3>
+                    <div class="product-price">$34.99</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <a href="#" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(3)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product3/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Shock Absorbers Set</h3>
-              <p class="product-price">$129.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Shock Absorbers Set', 129.99)"
-              >
-                Add to Cart
-              </button>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1629824222442-2c2025e9ac5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Headlights">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Lighting</div>
+                    <h3 class="product-title">LED Headlight Kit</h3>
+                    <div class="product-price">$129.99</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <a href="#" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(4)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product4/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Car Battery 12V</h3>
-              <p class="product-price">$89.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Car Battery 12V', 89.99)"
-              >
-                Add to Cart
-              </button>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1593941707882-a5bba533b3d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Oil Filter">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Maintenance</div>
+                    <h3 class="product-title">Synthetic Oil Filter</h3>
+                    <div class="product-price">$12.99</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <a href="#" class="view-details">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-    </div>
+    </section>
 
-    <!-- Products Page -->
-    <div id="products" class="page">
-      <section class="container">
-        <div class="products-header">
-          <h2 class="section-title" style="text-align: left; margin-bottom: 0">
-            All Products
-          </h2>
-          <div class="search-bar">
-            <input
-              type="text"
-              placeholder="Search products..."
-              id="searchInput"
-            />
-            <button onclick="searchProducts()">Search</button>
-          </div>
-          <div class="filter-sort">
-            <select id="categoryFilter" onchange="filterProducts(this.value)">
-              <option value="all">All Categories</option>
-              <option value="engine">Engine Parts</option>
-              <option value="brake">Brake System</option>
-              <option value="suspension">Suspension</option>
-              <option value="electrical">Electrical</option>
-            </select>
-            <select id="sortProducts" onchange="sortProducts(this.value)">
-              <option value="default">Sort By</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="name">Name: A to Z</option>
-            </select>
-          </div>
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: var(--cream);">Shop by Category</h2>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-oil-can"></i>
+                    </div>
+                    <div class="category-title">Engine Parts</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="category-title">Braking System</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="category-title">Electrical</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tire"></i>
+                    </div>
+                    <div class="category-title">Wheels & Tires</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-car-battery"></i>
+                    </div>
+                    <div class="category-title">Batteries</div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="category-title">Tools & Accessories</div>
+                </div>
+            </div>
         </div>
-        <div class="product-grid" id="allProducts">
-          <div class="product-card" onclick="showProductDetail(1)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product1/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Premium Brake Pads</h3>
-              <p class="product-price">$45.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Premium Brake Pads', 45.99)"
-              >
-                Add to Cart
-              </button>
+    </section>
+
+    <!-- About Preview -->
+    <section class="container">
+        <div class="about-preview">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Car Family Workshop">
             </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(2)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product2/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">High Performance Air Filter</h3>
-              <p class="product-price">$32.50</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('High Performance Air Filter', 32.50)"
-              >
-                Add to Cart
-              </button>
+            <div class="about-content">
+                <h2>About Car Family</h2>
+                <p>For over 15 years, Car Family has been providing automotive enthusiasts and professionals with high-quality parts and exceptional service. Our mission is to keep your vehicle running at its best with reliable components you can trust.</p>
+                <p>We source our products from reputable manufacturers and test them rigorously to ensure they meet our high standards for performance and durability.</p>
+                <a href="about.html" class="btn">Learn More</a>
             </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(3)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product3/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Shock Absorbers Set</h3>
-              <p class="product-price">$129.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Shock Absorbers Set', 129.99)"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(4)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product4/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Car Battery 12V</h3>
-              <p class="product-price">$89.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Car Battery 12V', 89.99)"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(5)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product5/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Engine Oil 5W-30</h3>
-              <p class="product-price">$24.99</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Engine Oil 5W-30', 24.99)"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(6)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product6/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Spark Plugs Set</h3>
-              <p class="product-price">$38.75</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Spark Plugs Set', 38.75)"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(7)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product7/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Alternator 12V</h3>
-              <p class="product-price">$185.00</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Alternator 12V', 185.00)"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-          <div class="product-card" onclick="showProductDetail(8)">
-            <div
-              class="product-img"
-              style="
-                background-image: url('https://picsum.photos/seed/product8/400/300.jpg');
-              "
-            ></div>
-            <div class="product-info">
-              <h3 class="product-title">Brake Rotors</h3>
-              <p class="product-price">$65.50</p>
-              <button
-                class="btn add-to-cart"
-                onclick="event.stopPropagation(); addToCart('Brake Rotors', 65.50)"
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
         </div>
-      </section>
-    </div>
-
-    <!-- Product Detail Page -->
-    <div id="product-detail" class="page">
-      <section class="container">
-        <div class="product-detail">
-          <div
-            class="product-detail-img"
-            id="productDetailImg"
-            style="
-              background-image: url('https://picsum.photos/seed/product1/800/600.jpg');
-            "
-          ></div>
-          <div class="product-detail-info">
-            <h1 id="productDetailTitle">Premium Brake Pads</h1>
-            <div class="product-detail-price" id="productDetailPrice">
-              $45.99
-            </div>
-            <div
-              class="product-detail-description"
-              id="productDetailDescription"
-            >
-              These premium brake pads are designed for superior stopping power
-              and durability. Made with high-quality materials, they provide
-              excellent performance in all driving conditions. Compatible with
-              most sedan and SUV models.
-            </div>
-            <div class="product-detail-meta">
-              <div class="meta-item">
-                <div class="meta-label">Brand</div>
-                <div id="productBrand">AutoPro</div>
-              </div>
-              <div class="meta-item">
-                <div class="meta-label">Part Number</div>
-                <div id="productPartNumber">BP-12345</div>
-              </div>
-              <div class="meta-item">
-                <div class="meta-label">Warranty</div>
-                <div id="productWarranty">2 Years</div>
-              </div>
-              <div class="meta-item">
-                <div class="meta-label">In Stock</div>
-                <div id="productStock">Yes</div>
-              </div>
-            </div>
-            <div class="quantity-selector">
-              <button onclick="decreaseQuantity()">-</button>
-              <input type="number" id="productQuantity" value="1" min="1" />
-              <button onclick="increaseQuantity()">+</button>
-            </div>
-            <div class="product-actions">
-              <button class="btn" onclick="addToCartFromDetail()">
-                Add to Cart
-              </button>
-              <button
-                class="btn btn-secondary"
-                onclick="showNotification('Added to wishlist!')"
-              >
-                Add to Wishlist
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-tabs">
-          <div class="tabs">
-            <div class="tab active" onclick="showTab('description')">
-              Description
-            </div>
-            <div class="tab" onclick="showTab('specifications')">
-              Specifications
-            </div>
-            <div class="tab" onclick="showTab('reviews')">Reviews</div>
-          </div>
-          <div class="tab-content active" id="description-tab">
-            <h3>Product Description</h3>
-            <p>
-              These premium brake pads are engineered to deliver exceptional
-              stopping performance and extended service life. They are
-              manufactured using advanced friction materials that provide
-              consistent braking power across a wide temperature range.
-            </p>
-            <p>Key features include:</p>
-            <ul>
-              <li>Superior stopping power in all weather conditions</li>
-              <li>Low dust formulation for cleaner wheels</li>
-              <li>Quiet operation with reduced brake noise</li>
-              <li>Easy installation with direct fitment</li>
-              <li>Meets or exceeds OEM specifications</li>
-            </ul>
-            <p>
-              Compatible with most sedan and SUV models from 2010-2022. Please
-              check your vehicle's compatibility before purchasing.
-            </p>
-          </div>
-          <div class="tab-content" id="specifications-tab">
-            <h3>Technical Specifications</h3>
-            <table style="width: 100%; border-collapse: collapse">
-              <tr style="border-bottom: 1px solid #eee">
-                <td style="padding: 10px; font-weight: bold">Material</td>
-                <td style="padding: 10px">Ceramic and Metallic Composite</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #eee">
-                <td style="padding: 10px; font-weight: bold">Thickness</td>
-                <td style="padding: 10px">16.5 mm</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #eee">
-                <td style="padding: 10px; font-weight: bold">Width</td>
-                <td style="padding: 10px">130 mm</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #eee">
-                <td style="padding: 10px; font-weight: bold">Length</td>
-                <td style="padding: 10px">155 mm</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #eee">
-                <td style="padding: 10px; font-weight: bold">Weight</td>
-                <td style="padding: 10px">1.2 lbs per pad</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #eee">
-                <td style="padding: 10px; font-weight: bold">
-                  Temperature Range
-                </td>
-                <td style="padding: 10px">-40°F to 1200°F (-40°C to 650°C)</td>
-              </tr>
-            </table>
-          </div>
-          <div class="tab-content" id="reviews-tab">
-            <h3>Customer Reviews</h3>
-            <div style="margin-bottom: 20px">
-              <div
-                style="display: flex; align-items: center; margin-bottom: 10px"
-              >
-                <div style="color: #f9a825; margin-right: 10px">★★★★★</div>
-                <div style="font-weight: bold">John D.</div>
-                <div style="margin-left: auto; color: #999">June 15, 2023</div>
-              </div>
-              <p>
-                Excellent brake pads! They stop my car smoothly and quietly.
-                Installation was straightforward and they've been performing
-                great for over 6 months now.
-              </p>
-            </div>
-            <div style="margin-bottom: 20px">
-              <div
-                style="display: flex; align-items: center; margin-bottom: 10px"
-              >
-                <div style="color: #f9a825; margin-right: 10px">★★★★☆</div>
-                <div style="font-weight: bold">Sarah M.</div>
-                <div style="margin-left: auto; color: #999">May 2, 2023</div>
-              </div>
-              <p>
-                Good quality brake pads. They work well and I've noticed less
-                brake dust on my wheels compared to my previous pads. Would
-                recommend.
-              </p>
-            </div>
-            <div style="margin-bottom: 20px">
-              <div
-                style="display: flex; align-items: center; margin-bottom: 10px"
-              >
-                <div style="color: #f9a825; margin-right: 10px">★★★★★</div>
-                <div style="font-weight: bold">Mike T.</div>
-                <div style="margin-left: auto; color: #999">April 18, 2023</div>
-              </div>
-              <p>
-                These are the best brake pads I've ever used. Great stopping
-                power and no noise at all. Will definitely buy again when
-                needed.
-              </p>
-            </div>
-            <button class="btn" style="margin-top: 20px">Write a Review</button>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- About Page -->
-    <div id="about" class="page">
-      <section class="container">
-        <h2 class="section-title">Car Family</h2>
-        <div style="max-width: 800px; margin: 0 auto; text-align: center">
-          <p style="font-size: 1.1rem; margin-bottom: 20px">
-            Car Family is your trusted source for high-quality car parts and
-            accessories. With over 20 years of experience in the automotive
-            industry, we understand what drivers and mechanics need to keep
-            their vehicles running smoothly.
-          </p>
-          <p style="font-size: 1.1rem; margin-bottom: 30px">
-            Our mission is to provide premium auto parts at competitive prices,
-            backed by exceptional customer service and expert technical support.
-          </p>
-
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-              gap: 30px;
-              margin-top: 50px;
-            "
-          >
-            <div
-              style="
-                background-color: white;
-                padding: 30px;
-                border-radius: 8px;
-                box-shadow: var(--shadow);
-              "
-            >
-              <div style="font-size: 3rem; margin-bottom: 20px">🚗</div>
-              <h3 style="margin-bottom: 15px; color: var(--dark-color)">
-                Wide Selection
-              </h3>
-              <p>
-                We offer thousands of parts for all makes and models, from
-                everyday vehicles to specialty cars.
-              </p>
-            </div>
-            <div
-              style="
-                background-color: white;
-                padding: 30px;
-                border-radius: 8px;
-                box-shadow: var(--shadow);
-              "
-            >
-              <div style="font-size: 3rem; margin-bottom: 20px">⭐</div>
-              <h3 style="margin-bottom: 15px; color: var(--dark-color)">
-                Quality Guaranteed
-              </h3>
-              <p>
-                All our parts meet or exceed OEM standards and come with
-                comprehensive warranties.
-              </p>
-            </div>
-            <div
-              style="
-                background-color: white;
-                padding: 30px;
-                border-radius: 8px;
-                box-shadow: var(--shadow);
-              "
-            >
-              <div style="font-size: 3rem; margin-bottom: 20px">🚚</div>
-              <h3 style="margin-bottom: 15px; color: var(--dark-color)">
-                Fast Shipping
-              </h3>
-              <p>
-                We offer fast and reliable shipping options to get your parts to
-                you when you need them.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Contact Page -->
-    <div id="contact" class="page">
-      <section class="container">
-        <h2 class="section-title">Contact Us</h2>
-        <div
-          style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-          "
-        >
-          <div>
-            <h3 style="margin-bottom: 20px; color: var(--dark-color)">
-              Get in Touch
-            </h3>
-            <p style="margin-bottom: 20px">
-              Have questions about our products or need help finding the right
-              part for your vehicle? Our team of experts is here to help!
-            </p>
-
-            <div style="margin-bottom: 20px">
-              <div style="font-weight: bold; margin-bottom: 5px">Address</div>
-              <div>123 Auto Parts Lane<br />Detroit, MI 48201</div>
-            </div>
-
-            <div style="margin-bottom: 20px">
-              <div style="font-weight: bold; margin-bottom: 5px">Phone</div>
-              <div>(800) 555-1234</div>
-            </div>
-
-            <div style="margin-bottom: 20px">
-              <div style="font-weight: bold; margin-bottom: 5px">Email</div>
-              <div>info@autopartspro.com</div>
-            </div>
-
-            <div style="margin-bottom: 20px">
-              <div style="font-weight: bold; margin-bottom: 5px">Hours</div>
-              <div>
-                Monday-Friday: 8am-6pm EST<br />Saturday: 9am-4pm EST<br />Sunday:
-                Closed
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 style="margin-bottom: 20px; color: var(--dark-color)">
-              Send us a Message
-            </h3>
-            <form onsubmit="submitForm(event)">
-              <div style="margin-bottom: 15px">
-                <label
-                  for="name"
-                  style="display: block; margin-bottom: 5px; font-weight: 500"
-                  >Name</label
-                >
-                <input
-                  type="text"
-                  id="name"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid var(--border-color);
-                    border-radius: 4px;
-                  "
-                  required
-                />
-              </div>
-              <div style="margin-bottom: 15px">
-                <label
-                  for="email"
-                  style="display: block; margin-bottom: 5px; font-weight: 500"
-                  >Email</label
-                >
-                <input
-                  type="email"
-                  id="email"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid var(--border-color);
-                    border-radius: 4px;
-                  "
-                  required
-                />
-              </div>
-              <div style="margin-bottom: 15px">
-                <label
-                  for="subject"
-                  style="display: block; margin-bottom: 5px; font-weight: 500"
-                  >Subject</label
-                >
-                <input
-                  type="text"
-                  id="subject"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid var(--border-color);
-                    border-radius: 4px;
-                  "
-                  required
-                />
-              </div>
-              <div style="margin-bottom: 15px">
-                <label
-                  for="message"
-                  style="display: block; margin-bottom: 5px; font-weight: 500"
-                  >Message</label
-                >
-                <textarea
-                  id="message"
-                  rows="5"
-                  style="
-                    width: 100%;
-                    padding: 10px;
-                    border: 1px solid var(--border-color);
-                    border-radius: 4px;
-                  "
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn">Send Message</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-column">
-            <h3>Car Family</h3>
-            <p>
-              Your trusted source for high-quality car parts and accessories
-              since 2003.
-            </p>
-          </div>
-          <div class="footer-column">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#" onclick="showPage('home')">Home</a></li>
-              <li><a href="#" onclick="showPage('products')">Products</a></li>
-              <li><a href="#" onclick="showPage('about')">About Us</a></li>
-              <li><a href="#" onclick="showPage('contact')">Contact</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3>Customer Service</h3>
-            <ul>
-              <li><a href="#">Shipping Policy</a></li>
-              <li><a href="#">Returns & Exchanges</a></li>
-              <li><a href="#">Warranty Information</a></li>
-              <li><a href="#">FAQ</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h3>Newsletter</h3>
-            <p>Subscribe to receive special offers and updates.</p>
-            <form
-              style="margin-top: 15px"
-              onsubmit="subscribeNewsletter(event)"
-            >
-              <input
-                type="email"
-                placeholder="Your email address"
-                style="
-                  width: 100%;
-                  padding: 10px;
-                  border: none;
-                  border-radius: 4px;
-                  margin-bottom: 10px;
-                "
-                required
-              />
-              <button type="submit" class="btn">Subscribe</button>
-            </form>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2023 Car Family. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Notification -->
-    <div id="notification" class="notification"></div>
+    </section>
 
     <script>
-      // Page Navigation
-      function showPage(pageId) {
-        // Hide all pages
-        const pages = document.querySelectorAll(".page");
-        pages.forEach((page) => {
-          page.classList.remove("active");
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
         });
-
-        // Show selected page
-        document.getElementById(pageId).classList.add("active");
-
-        // Update active nav link
-        const navLinks = document.querySelectorAll(".nav-link");
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
+        
+        // Simple cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const countElement = document.querySelector('.cart-count');
+                let count = parseInt(countElement.textContent);
+                count++;
+                countElement.textContent = count;
+                
+                // Simple animation
+                countElement.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    countElement.style.transform = 'scale(1)';
+                }, 300);
+            });
         });
-
-        // Find and activate the corresponding nav link
-        if (pageId === "home") {
-          navLinks[0].classList.add("active");
-        } else if (pageId === "products") {
-          navLinks[1].classList.add("active");
-        } else if (pageId === "about") {
-          navLinks[2].classList.add("active");
-        } else if (pageId === "contact") {
-          navLinks[3].classList.add("active");
-        }
-
-        // Scroll to top
-        window.scrollTo(0, 0);
-      }
-
-      // Product Detail
-      const productDetails = {
-        1: {
-          title: "Premium Brake Pads",
-          price: "$45.99",
-          image: "https://picsum.photos/seed/product1/800/600.jpg",
-          description:
-            "These premium brake pads are designed for superior stopping power and durability. Made with high-quality materials, they provide excellent performance in all driving conditions. Compatible with most sedan and SUV models.",
-          brand: "AutoPro",
-          partNumber: "BP-12345",
-          warranty: "2 Years",
-          stock: "Yes",
-        },
-        2: {
-          title: "High Performance Air Filter",
-          price: "$32.50",
-          image: "https://picsum.photos/seed/product2/800/600.jpg",
-          description:
-            "This high-performance air filter is designed to increase airflow to your engine, resulting in improved horsepower and fuel efficiency. Made with premium materials for long-lasting performance.",
-          brand: "AirFlow Pro",
-          partNumber: "AF-67890",
-          warranty: "1 Year",
-          stock: "Yes",
-        },
-        3: {
-          title: "Shock Absorbers Set",
-          price: "$129.99",
-          image: "https://picsum.photos/seed/product3/800/600.jpg",
-          description:
-            "This complete shock absorbers set provides excellent handling and ride comfort for your vehicle. Designed to meet or exceed OEM specifications for a perfect fit and reliable performance.",
-          brand: "RideMaster",
-          partNumber: "SA-24680",
-          warranty: "3 Years",
-          stock: "Yes",
-        },
-        4: {
-          title: "Car Battery 12V",
-          price: "$89.99",
-          image: "https://picsum.photos/seed/product4/800/600.jpg",
-          description:
-            "This reliable 12V car battery delivers consistent starting power in all weather conditions. With advanced technology and durable construction, it provides long-lasting performance for your vehicle.",
-          brand: "PowerCell",
-          partNumber: "CB-13579",
-          warranty: "2 Years",
-          stock: "Yes",
-        },
-        5: {
-          title: "Engine Oil 5W-30",
-          price: "$24.99",
-          image: "https://picsum.photos/seed/product5/800/600.jpg",
-          description:
-            "This high-quality 5W-30 engine oil provides superior protection for your engine in all driving conditions. Formulated with advanced additives to reduce wear and extend engine life.",
-          brand: "LubriTech",
-          partNumber: "EO-11223",
-          warranty: "1 Year",
-          stock: "Yes",
-        },
-        6: {
-          title: "Spark Plugs Set",
-          price: "$38.75",
-          image: "https://picsum.photos/seed/product6/800/600.jpg",
-          description:
-            "This spark plugs set is designed to deliver optimal performance and fuel efficiency. With advanced electrode design, they provide reliable ignition and longer service life.",
-          brand: "IgnitionPro",
-          partNumber: "SP-44556",
-          warranty: "2 Years",
-          stock: "Yes",
-        },
-        7: {
-          title: "Alternator 12V",
-          price: "$185.00",
-          image: "https://picsum.photos/seed/product7/800/600.jpg",
-          description:
-            "This high-output 12V alternator provides reliable charging power for your vehicle's electrical system. Built to meet or exceed OEM specifications for perfect fit and performance.",
-          brand: "PowerGen",
-          partNumber: "AL-77889",
-          warranty: "3 Years",
-          stock: "Yes",
-        },
-        8: {
-          title: "Brake Rotors",
-          price: "$65.50",
-          image: "https://picsum.photos/seed/product8/800/600.jpg",
-          description:
-            "These premium brake rotors are designed for maximum stopping power and heat dissipation. Made with high-quality materials for consistent performance and extended service life.",
-          brand: "StopTech",
-          partNumber: "BR-99001",
-          warranty: "2 Years",
-          stock: "Yes",
-        },
-      };
-
-      function showProductDetail(productId) {
-        const product = productDetails[productId];
-        if (product) {
-          document.getElementById(
-            "productDetailImg"
-          ).style.backgroundImage = `url('${product.image}')`;
-          document.getElementById("productDetailTitle").textContent =
-            product.title;
-          document.getElementById("productDetailPrice").textContent =
-            product.price;
-          document.getElementById("productDetailDescription").textContent =
-            product.description;
-          document.getElementById("productBrand").textContent = product.brand;
-          document.getElementById("productPartNumber").textContent =
-            product.partNumber;
-          document.getElementById("productWarranty").textContent =
-            product.warranty;
-          document.getElementById("productStock").textContent = product.stock;
-          document.getElementById("productQuantity").value = 1;
-
-          // Reset tabs
-          document
-            .querySelectorAll(".tab")
-            .forEach((tab) => tab.classList.remove("active"));
-          document
-            .querySelectorAll(".tab-content")
-            .forEach((content) => content.classList.remove("active"));
-          document.querySelector(".tab").classList.add("active");
-          document.getElementById("description-tab").classList.add("active");
-
-          showPage("product-detail");
-        }
-      }
-
-      // Cart functionality
-      let cartCount = 0;
-      const cartCountElement = document.querySelector(".cart-count");
-
-      function addToCart(productName, price) {
-        cartCount++;
-        cartCountElement.textContent = cartCount;
-        showNotification(`${productName} added to cart!`);
-      }
-
-      function addToCartFromDetail() {
-        const productName =
-          document.getElementById("productDetailTitle").textContent;
-        const quantity = document.getElementById("productQuantity").value;
-        cartCount += parseInt(quantity);
-        cartCountElement.textContent = cartCount;
-        showNotification(`${quantity} x ${productName} added to cart!`);
-      }
-
-      // Quantity selector
-      function increaseQuantity() {
-        const quantityInput = document.getElementById("productQuantity");
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-      }
-
-      function decreaseQuantity() {
-        const quantityInput = document.getElementById("productQuantity");
-        if (parseInt(quantityInput.value) > 1) {
-          quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-      }
-
-      // Tabs
-      function showTab(tabName) {
-        // Update active tab
-        document
-          .querySelectorAll(".tab")
-          .forEach((tab) => tab.classList.remove("active"));
-        event.target.classList.add("active");
-
-        // Show corresponding content
-        document
-          .querySelectorAll(".tab-content")
-          .forEach((content) => content.classList.remove("active"));
-        document.getElementById(`${tabName}-tab`).classList.add("active");
-      }
-
-      // Product filtering and sorting
-      function filterProducts(category) {
-        showPage("products");
-        document.getElementById("categoryFilter").value = category;
-        showNotification(
-          `Showing ${category === "all" ? "all" : category} products`
-        );
-      }
-
-      function sortProducts(sortBy) {
-        const productsContainer = document.getElementById("allProducts");
-        const products = Array.from(productsContainer.children);
-
-        products.sort((a, b) => {
-          if (sortBy === "price-low") {
-            const priceA = parseFloat(
-              a.querySelector(".product-price").textContent.replace("$", "")
-            );
-            const priceB = parseFloat(
-              b.querySelector(".product-price").textContent.replace("$", "")
-            );
-            return priceA - priceB;
-          } else if (sortBy === "price-high") {
-            const priceA = parseFloat(
-              a.querySelector(".product-price").textContent.replace("$", "")
-            );
-            const priceB = parseFloat(
-              b.querySelector(".product-price").textContent.replace("$", "")
-            );
-            return priceB - priceA;
-          } else if (sortBy === "name") {
-            const nameA = a.querySelector(".product-title").textContent;
-            const nameB = b.querySelector(".product-title").textContent;
-            return nameA.localeCompare(nameB);
-          }
-          return 0;
-        });
-
-        // Re-append sorted products
-        products.forEach((product) => productsContainer.appendChild(product));
-      }
-
-      function searchProducts() {
-        const searchTerm = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        const products = document.querySelectorAll(
-          "#allProducts .product-card"
-        );
-
-        products.forEach((product) => {
-          const title = product
-            .querySelector(".product-title")
-            .textContent.toLowerCase();
-          if (title.includes(searchTerm)) {
-            product.style.display = "block";
-          } else {
-            product.style.display = "none";
-          }
-        });
-
-        showNotification(`Searching for "${searchTerm}"`);
-      }
-
-      // Notification
-      function showNotification(message) {
-        const notification = document.getElementById("notification");
-        notification.textContent = message;
-        notification.classList.add("show");
-
-        setTimeout(() => {
-          notification.classList.remove("show");
-        }, 3000);
-      }
-
-      // Form submissions
-      function submitForm(event) {
-        event.preventDefault();
-        showNotification(
-          "Message sent successfully! We will contact you soon."
-        );
-        event.target.reset();
-      }
-
-      function subscribeNewsletter(event) {
-        event.preventDefault();
-        showNotification("Successfully subscribed to our newsletter!");
-        event.target.reset();
-      }
-
-      // Mobile menu
-      function toggleMobileMenu() {
-        const nav = document.querySelector("nav ul");
-        if (nav.style.display === "flex") {
-          nav.style.display = "none";
-        } else {
-          nav.style.display = "flex";
-          nav.style.flexDirection = "column";
-          nav.style.position = "absolute";
-          nav.style.top = "70px";
-          nav.style.left = "0";
-          nav.style.width = "100%";
-          nav.style.backgroundColor = "white";
-          nav.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
-          nav.style.padding = "20px";
-
-          nav.querySelectorAll("li").forEach((li) => {
-            li.style.margin = "10px 0";
-          });
-        }
-      }
-
-      // Initialize
-      document.addEventListener("DOMContentLoaded", function () {
-        // Add event listener for search input
-        document
-          .getElementById("searchInput")
-          .addEventListener("keyup", function (event) {
-            if (event.key === "Enter") {
-              searchProducts();
-            }
-          });
-      });
     </script>
-  </body>
+</body>
 </html>
