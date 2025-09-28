@@ -1,813 +1,903 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products - Car Family</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        :root {
-            --cream: #EFE4D2;
-            --blue-light: #254D70;
-            --blue-dark: #131D4F;
-            --rust: #954C2E;
-            --white: #FFFFFF;
-            --gray-light: #F5F5F5;
-            --gray: #777777;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--cream);
-            color: var(--blue-dark);
-            line-height: 1.6;
-        }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--blue-dark);
-            color: var(--cream);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            color: var(--rust);
-            margin-right: 10px;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 25px;
-        }
-        
-        nav ul li a {
-            font-weight: 500;
-            transition: color 0.3s;
-            padding: 5px 0;
-            position: relative;
-        }
-        
-        nav ul li a:hover {
-            color: var(--rust);
-        }
-        
-        nav ul li a.active {
-            color: var(--rust);
-        }
-        
-        nav ul li a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--rust);
-        }
-        
-        .header-actions {
-            display: flex;
-            align-items: center;
-        }
-        
-        .search-box {
-            position: relative;
-            margin-right: 20px;
-        }
-        
-        .search-box input {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: none;
-            width: 200px;
-            background-color: var(--blue-light);
-            color: var(--cream);
-        }
-        
-        .search-box input::placeholder {
-            color: var(--cream);
-            opacity: 0.7;
-        }
-        
-        .search-box i {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--cream);
-        }
-        
-        .cart-icon {
-            position: relative;
-            font-size: 1.2rem;
-        }
-        
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: var(--rust);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Page Header */
-        .page-header {
-            background-color: var(--blue-light);
-            color: var(--cream);
-            padding: 60px 0 40px;
-            text-align: center;
-        }
-        
-        .page-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .breadcrumb {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            font-size: 0.9rem;
-        }
-        
-        .breadcrumb li {
-            margin: 0 5px;
-        }
-        
-        .breadcrumb li:not(:last-child)::after {
-            content: '>';
-            margin-left: 10px;
-        }
-        
-        /* Products Section */
-        .products-section {
-            padding: 60px 0;
-        }
-        
+      :root {
+        --cream: #efe4d2;
+        --blue-light: #254d70;
+        --blue-dark: #131d4f;
+        --rust: #954c2e;
+        --white: #ffffff;
+        --gray-light: #f5f5f5;
+        --gray: #777777;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--cream);
+        color: var(--blue-dark);
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--blue-dark);
+        color: var(--cream);
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo i {
+        color: var(--rust);
+        margin-right: 10px;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 25px;
+      }
+
+      nav ul li a {
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 5px 0;
+        position: relative;
+      }
+
+      nav ul li a:hover {
+        color: var(--rust);
+      }
+
+      nav ul li a.active {
+        color: var(--rust);
+      }
+
+      nav ul li a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--rust);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .search-box {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .search-box input {
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: none;
+        width: 200px;
+        background-color: var(--blue-light);
+        color: var(--cream);
+      }
+
+      .search-box input::placeholder {
+        color: var(--cream);
+        opacity: 0.7;
+      }
+
+      .search-box i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--cream);
+      }
+
+      .cart-icon {
+        position: relative;
+        font-size: 1.2rem;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: var(--rust);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Page Header */
+      .page-header {
+        background-color: var(--blue-light);
+        color: var(--cream);
+        padding: 60px 0 40px;
+        text-align: center;
+      }
+
+      .page-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .breadcrumb {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        font-size: 0.9rem;
+      }
+
+      .breadcrumb li {
+        margin: 0 5px;
+      }
+
+      .breadcrumb li:not(:last-child)::after {
+        content: ">";
+        margin-left: 10px;
+      }
+
+      /* Products Section */
+      .products-section {
+        padding: 60px 0;
+      }
+
+      .products-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .results-count {
+        font-weight: 500;
+      }
+
+      .sort-filter {
+        display: flex;
+        gap: 15px;
+      }
+
+      .filter-select {
+        padding: 8px 15px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: white;
+        color: var(--blue-dark);
+      }
+
+      .view-options {
+        display: flex;
+        gap: 10px;
+      }
+
+      .view-btn {
+        background: white;
+        border: 1px solid #ddd;
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .view-btn.active {
+        background-color: var(--blue-dark);
+        color: white;
+        border-color: var(--blue-dark);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .product-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .product-img {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .product-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .product-card:hover .product-img img {
+        transform: scale(1.1);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--rust);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .sale-sold-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--rust);
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .sale-sold-btn:hover {
+        background-color: var(--blue-light);
+        transform: scale(1.05);
+      }
+
+      .sale-sold-btn.sold {
+        background-color: #28a745;
+        cursor: default;
+      }
+
+      .sale-sold-btn.sold:hover {
+        background-color: #28a745;
+        transform: none;
+      }
+
+      .product-info {
+        padding: 20px;
+      }
+
+      .product-category {
+        color: var(--rust);
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .product-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: var(--blue-dark);
+      }
+
+      .product-rating {
+        color: #ffc107;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+      }
+
+      .product-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--blue-light);
+        margin-bottom: 15px;
+      }
+
+      .product-price .old-price {
+        font-size: 1rem;
+        color: var(--gray);
+        text-decoration: line-through;
+        margin-left: 10px;
+      }
+
+      .product-actions {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .add-to-cart {
+        background-color: var(--blue-dark);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+
+      .add-to-cart:hover {
+        background-color: var(--blue-light);
+      }
+
+      .wishlist-btn {
+        background-color: var(--gray-light);
+        border: none;
+        width: 40px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .wishlist-btn:hover {
+        background-color: #e0e0e0;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin-top: 50px;
+      }
+
+      .pagination li {
+        margin: 0 5px;
+      }
+
+      .pagination a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        background-color: white;
+        color: var(--blue-dark);
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      .pagination a:hover,
+      .pagination a.active {
+        background-color: var(--blue-dark);
+        color: white;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 992px) {
         .products-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
+          flex-direction: column;
+          align-items: flex-start;
         }
-        
-        .results-count {
-            font-weight: 500;
-        }
-        
+
         .sort-filter {
-            display: flex;
-            gap: 15px;
+          width: 100%;
+          justify-content: space-between;
+          margin-top: 15px;
         }
-        
-        .filter-select {
-            padding: 8px 15px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            background-color: white;
-            color: var(--blue-dark);
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          flex-wrap: wrap;
         }
-        
-        .view-options {
-            display: flex;
-            gap: 10px;
+
+        .mobile-menu-btn {
+          display: block;
         }
-        
-        .view-btn {
-            background: white;
-            border: 1px solid #ddd;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
+
+        nav {
+          width: 100%;
+          margin-top: 15px;
+          display: none;
         }
-        
-        .view-btn.active {
-            background-color: var(--blue-dark);
-            color: white;
-            border-color: var(--blue-dark);
+
+        nav.active {
+          display: block;
         }
-        
+
+        nav ul {
+          flex-direction: column;
+        }
+
+        nav ul li {
+          margin: 10px 0;
+        }
+
+        .search-box {
+          margin-right: 10px;
+        }
+
+        .search-box input {
+          width: 150px;
+        }
+
+        .page-header h1 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
         .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+          grid-template-columns: 1fr;
         }
-        
-        .product-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+
+        .sort-filter {
+          flex-direction: column;
+          gap: 10px;
         }
-        
-        .product-card:hover {
-            transform: translateY(-10px);
+
+        .search-box {
+          display: none;
         }
-        
-        .product-img {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
+
+        .view-options {
+          display: none;
         }
-        
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .product-card:hover .product-img img {
-            transform: scale(1.1);
-        }
-        
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--rust);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .product-info {
-            padding: 20px;
-        }
-        
-        .product-category {
-            color: var(--rust);
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-        
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--blue-dark);
-        }
-        
-        .product-rating {
-            color: #ffc107;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .product-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--blue-light);
-            margin-bottom: 15px;
-        }
-        
-        .product-price .old-price {
-            font-size: 1rem;
-            color: var(--gray);
-            text-decoration: line-through;
-            margin-left: 10px;
-        }
-        
-        .product-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .add-to-cart {
-            background-color: var(--blue-dark);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            flex-grow: 1;
-            margin-right: 10px;
-        }
-        
-        .add-to-cart:hover {
-            background-color: var(--blue-light);
-        }
-        
-        .wishlist-btn {
-            background-color: var(--gray-light);
-            border: none;
-            width: 40px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .wishlist-btn:hover {
-            background-color: #e0e0e0;
-        }
-        
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin-top: 50px;
-        }
-        
-        .pagination li {
-            margin: 0 5px;
-        }
-        
-        .pagination a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            background-color: white;
-            color: var(--blue-dark);
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .pagination a:hover, .pagination a.active {
-            background-color: var(--blue-dark);
-            color: white;
-        }
-        
-        /* Mobile Responsiveness */
-        @media (max-width: 992px) {
-            .products-controls {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .sort-filter {
-                width: 100%;
-                justify-content: space-between;
-                margin-top: 15px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-content {
-                flex-wrap: wrap;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            nav {
-                width: 100%;
-                margin-top: 15px;
-                display: none;
-            }
-            
-            nav.active {
-                display: block;
-            }
-            
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
-            }
-            
-            .search-box {
-                margin-right: 10px;
-            }
-            
-            .search-box input {
-                width: 150px;
-            }
-            
-            .page-header h1 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .sort-filter {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .search-box {
-                display: none;
-            }
-            
-            .view-options {
-                display: none;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                 
-                    <span>Car Family</span>
-                </div>
-                
-                <div class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
-                
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="products.html" class="active">Products</a></li>
-                        <li><a href="categories.html">Categories</a></li>
-                        <li><a href="about.html">About</a></li>
-                       
-                    </ul>
-                </nav>
-                
-                <div class="header-actions">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search parts...">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">3</span>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <span>Car Family</span>
+          </div>
+
+          <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </div>
+
+          <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html" class="active">Products</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="about.html">About</a></li>
+            </ul>
+          </nav>
+
+          <div class="header-actions">
+            <div class="search-box">
+              <input type="text" placeholder="Search parts..." />
+              <i class="fas fa-search"></i>
             </div>
+            <div class="cart-icon">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count">3</span>
+            </div>
+          </div>
         </div>
+      </div>
     </header>
 
     <!-- Page Header -->
     <section class="page-header">
-        <div class="container">
-            <h1>Our Products</h1>
-            <ul class="breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li>Products</li>
-            </ul>
-        </div>
+      <div class="container">
+        <h1>Our Products</h1>
+        <ul class="breadcrumb">
+          <li><a href="index.html">Home</a></li>
+          <li>Products</li>
+        </ul>
+      </div>
     </section>
 
     <!-- Products Section -->
     <section class="products-section">
-        <div class="container">
-            <div class="products-controls">
-                <div class="results-count">Showing 1-12 of 86 products</div>
-                
-                <div class="sort-filter">
-                    <select class="filter-select">
-                        <option>All Categories</option>
-                        <option>Engine Parts</option>
-                        <option>Braking System</option>
-                        <option>Electrical</option>
-                        <option>Wheels & Tires</option>
-                        <option>Batteries</option>
-                        <option>Tools & Accessories</option>
-                    </select>
-                    
-                    <select class="filter-select">
-                        <option>Sort by: Featured</option>
-                        <option>Sort by: Price Low to High</option>
-                        <option>Sort by: Price High to Low</option>
-                        <option>Sort by: Newest</option>
-                        <option>Sort by: Rating</option>
-                    </select>
-                    
-                    <div class="view-options">
-                        <button class="view-btn active"><i class="fas fa-th"></i></button>
-                        <button class="view-btn"><i class="fas fa-list"></i></button>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="products-controls">
+          <div class="results-count">Showing 1-12 of 86 products</div>
+
+          <div class="sort-filter">
+            <select class="filter-select">
+              <option>All Categories</option>
+              <option>Engine Parts</option>
+              <option>Braking System</option>
+              <option>Electrical</option>
+              <option>Wheels & Tires</option>
+              <option>Batteries</option>
+              <option>Tools & Accessories</option>
+            </select>
+
+            <select class="filter-select">
+              <option>Sort by: Featured</option>
+              <option>Sort by: Price Low to High</option>
+              <option>Sort by: Price High to Low</option>
+              <option>Sort by: Newest</option>
+              <option>Sort by: Rating</option>
+            </select>
+
+            <div class="view-options">
+              <button class="view-btn active"><i class="fas fa-th"></i></button>
+              <button class="view-btn"><i class="fas fa-list"></i></button>
             </div>
-            
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://tse3.mm.bing.net/th/id/OIP.puj2fQnm2Kw95C8Mv2pnPwHaG6?rs=1&pid=ImgDetMain&o=7&rm=3">
-                        <span class="product-badge">Sale</span>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Braking System</div>
-                        <h3 class="product-title">Premium Brake Pads</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(42)</span>
-                        </div>
-                        <div class="product-price">$89.99 <span class="old-price">$109.99</span></div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://th.bing.com/th/id/R.86e3930710686b8835e78762a4267aaf?rik=kdhuZFbFmAdScA&riu=http%3a%2f%2fatlas-content-cdn.pixelsquid.com%2fstock-images%2fair-filter-zeLZW3F-600.jpg&ehk=b0NXvfhYLN5w0uKGx7uGzUJTliAf37bcdEZkl1AtviU%3d&risl=&pid=ImgRaw&r=0" alt="Air Filter">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Engine Parts</div>
-                        <h3 class="product-title">High-Performance Air Filter</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(28)</span>
-                        </div>
-                        <div class="product-price">$34.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://s.alicdn.com/@sc04/kf/HTB125mAKASWBuNjSszdq6zeSpXa7.jpg_720x720q50.jpg" alt="Headlights">
-                        <span class="product-badge">New</span>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Lighting</div>
-                        <h3 class="product-title">LED Headlight Kit</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(56)</span>
-                        </div>
-                        <div class="product-price">$129.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://image.made-in-china.com/2f0j00EesiktPqJGuv/6655066-Kbj1691-HD47-Hydraulic-Filter-Spin-on-for-Bobcat-Spare-Parts.jpg" alt="Oil Filter">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Maintenance</div>
-                        <h3 class="product-title">Synthetic Oil Filter</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <i class="far fa-star"></i>
-                            <span>(35)</span>
-                        </div>
-                        <div class="product-price">$12.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://tse4.mm.bing.net/th/id/OIP.GGWDv1xdF_Acg_CNPa999QHaHa?w=1000&h=1000&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Spark Plugs">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Engine Parts</div>
-                        <h3 class="product-title">Iridium Spark Plugs (Set of 4)</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(47)</span>
-                        </div>
-                        <div class="product-price">$45.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://p.globalsources.com/IMAGES/PDT/B1191767135/12V-90Ah-LiFePO4-lithium-Battery.jpg" alt="Car Battery">
-                        <span class="product-badge">Best Seller</span>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Batteries</div>
-                        <h3 class="product-title">Heavy-Duty Car Battery</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(63)</span>
-                        </div>
-                        <div class="product-price">$149.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://www.urotuning.com/cdn/shop/products/Untitled-6_grande.jpg?v=1635956797" alt="Windshield Wipers">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Exterior</div>
-                        <h3 class="product-title">All-Weather Windshield Wipers</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(39)</span>
-                        </div>
-                        <div class="product-price">$24.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://cdn11.bigcommerce.com/s-58j8dlynp5/images/stencil/original/products/703/1857/2024_KONA_LINERS__83515.1711397381.jpg" alt="Car Mats">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Interior</div>
-                        <h3 class="product-title">Premium All-Weather Car Mats</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(71)</span>
-                        </div>
-                        <div class="product-price">$79.99</div>
-                        <div class="product-actions">
-                            <button class="add-to-cart">Add to Cart</button>
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <ul class="pagination">
-                <li><a href="#" class="active">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#"><i class="fas fa-chevron-right"></i></a></li>
-            </ul>
+          </div>
         </div>
+
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://tse3.mm.bing.net/th/id/OIP.puj2fQnm2Kw95C8Mv2pnPwHaG6?rs=1&pid=ImgDetMain&o=7&rm=3"
+              />
+              <button class="sale-sold-btn">Sale</button>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Braking System</div>
+              <h3 class="product-title">Premium Brake Pads</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(42)</span>
+              </div>
+              <div class="product-price">
+                $89.99 <span class="old-price">$109.99</span>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://th.bing.com/th/id/R.86e3930710686b8835e78762a4267aaf?rik=kdhuZFbFmAdScA&riu=http%3a%2f%2fatlas-content-cdn.pixelsquid.com%2fstock-images%2fair-filter-zeLZW3F-600.jpg&ehk=b0NXvfhYLN5w0uKGx7uGzUJTliAf37bcdEZkl1AtviU%3d&risl=&pid=ImgRaw&r=0"
+                alt="Air Filter"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Engine Parts</div>
+              <h3 class="product-title">High-Performance Air Filter</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(28)</span>
+              </div>
+              <div class="product-price">$34.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://s.alicdn.com/@sc04/kf/HTB125mAKASWBuNjSszdq6zeSpXa7.jpg_720x720q50.jpg"
+                alt="Headlights"
+              />
+              <span class="product-badge">New</span>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Lighting</div>
+              <h3 class="product-title">LED Headlight Kit</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(56)</span>
+              </div>
+              <div class="product-price">$129.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://image.made-in-china.com/2f0j00EesiktPqJGuv/6655066-Kbj1691-HD47-Hydraulic-Filter-Spin-on-for-Bobcat-Spare-Parts.jpg"
+                alt="Oil Filter"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Maintenance</div>
+              <h3 class="product-title">Synthetic Oil Filter</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+                <span>(35)</span>
+              </div>
+              <div class="product-price">$12.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://tse4.mm.bing.net/th/id/OIP.GGWDv1xdF_Acg_CNPa999QHaHa?w=1000&h=1000&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Spark Plugs"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Engine Parts</div>
+              <h3 class="product-title">Iridium Spark Plugs (Set of 4)</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(47)</span>
+              </div>
+              <div class="product-price">$45.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://p.globalsources.com/IMAGES/PDT/B1191767135/12V-90Ah-LiFePO4-lithium-Battery.jpg"
+                alt="Car Battery"
+              />
+              <span class="product-badge">Best Seller</span>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Batteries</div>
+              <h3 class="product-title">Heavy-Duty Car Battery</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(63)</span>
+              </div>
+              <div class="product-price">$149.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://www.urotuning.com/cdn/shop/products/Untitled-6_grande.jpg?v=1635956797"
+                alt="Windshield Wipers"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Exterior</div>
+              <h3 class="product-title">All-Weather Windshield Wipers</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(39)</span>
+              </div>
+              <div class="product-price">$24.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img">
+              <img
+                src="https://cdn11.bigcommerce.com/s-58j8dlynp5/images/stencil/original/products/703/1857/2024_KONA_LINERS__83515.1711397381.jpg"
+                alt="Car Mats"
+              />
+            </div>
+            <div class="product-info">
+              <div class="product-category">Interior</div>
+              <h3 class="product-title">Premium All-Weather Car Mats</h3>
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(71)</span>
+              </div>
+              <div class="product-price">$79.99</div>
+              <div class="product-actions">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="wishlist-btn">
+                  <i class="far fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="pagination">
+          <li><a href="#" class="active">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li>
+            <a href="#"><i class="fas fa-chevron-right"></i></a>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('nav').classList.toggle('active');
+      // Mobile menu toggle
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector("nav").classList.toggle("active");
         });
-        
-        // Simple cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const countElement = document.querySelector('.cart-count');
-                let count = parseInt(countElement.textContent);
-                count++;
-                countElement.textContent = count;
-                
-                // Simple animation
-                countElement.style.transform = 'scale(1.5)';
-                setTimeout(() => {
-                    countElement.style.transform = 'scale(1)';
-                }, 300);
-                
-                // Show added message
-                const productTitle = this.closest('.product-card').querySelector('.product-title').textContent;
-                alert(`${productTitle} added to cart!`);
-            });
+
+      // Simple cart functionality
+      document.querySelectorAll(".add-to-cart").forEach((button) => {
+        button.addEventListener("click", function () {
+          const countElement = document.querySelector(".cart-count");
+          let count = parseInt(countElement.textContent);
+          count++;
+          countElement.textContent = count;
+
+          // Simple animation
+          countElement.style.transform = "scale(1.5)";
+          setTimeout(() => {
+            countElement.style.transform = "scale(1)";
+          }, 300);
+
+          // Show added message
+          const productTitle =
+            this.closest(".product-card").querySelector(
+              ".product-title"
+            ).textContent;
+          alert(`${productTitle} added to cart!`);
         });
-        
-        // Wishlist functionality
-        document.querySelectorAll('.wishlist-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const icon = this.querySelector('i');
-                if (icon.classList.contains('far')) {
-                    icon.classList.remove('far');
-                    icon.classList.add('fas');
-                    this.style.backgroundColor = '#ffe0e0';
-                } else {
-                    icon.classList.remove('fas');
-                    icon.classList.add('far');
-                    this.style.backgroundColor = '';
-                }
-            });
+      });
+
+      // Wishlist functionality
+      document.querySelectorAll(".wishlist-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const icon = this.querySelector("i");
+          if (icon.classList.contains("far")) {
+            icon.classList.remove("far");
+            icon.classList.add("fas");
+            this.style.backgroundColor = "#ffe0e0";
+          } else {
+            icon.classList.remove("fas");
+            icon.classList.add("far");
+            this.style.backgroundColor = "";
+          }
         });
-        
-        // View options functionality
-        document.querySelectorAll('.view-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                document.querySelectorAll('.view-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                // In a real implementation, this would change the layout
-                if (this.querySelector('i').classList.contains('fa-list')) {
-                    alert('Switching to list view');
-                } else {
-                    alert('Switching to grid view');
-                }
-            });
+      });
+
+      // View options functionality
+      document.querySelectorAll(".view-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          document.querySelectorAll(".view-btn").forEach((btn) => {
+            btn.classList.remove("active");
+          });
+          this.classList.add("active");
+
+          // In a real implementation, this would change the layout
+          if (this.querySelector("i").classList.contains("fa-list")) {
+            alert("Switching to list view");
+          } else {
+            alert("Switching to grid view");
+          }
         });
+      });
+
+      // Sale/Sold button functionality
+      document.querySelectorAll(".sale-sold-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          if (!this.classList.contains("sold")) {
+            this.textContent = "Sold";
+            this.classList.add("sold");
+          }
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
